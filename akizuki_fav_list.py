@@ -4,6 +4,7 @@
 #   「ウェブページ、htmlのみ」で保存した00.html〜99.htmlから抽出
 #   by @pado3@mstdn.jp
 #   r1.0 2024/01/28 initial release
+#   r1.1 2024/01/28 単ファイル読み込み後closeし忘れていたのを修正
 #
 import os
 import re
@@ -76,6 +77,7 @@ def get_s(s_soup: BeautifulSoup):
 def single_soup(file: str):
     s = open(file, 'r')
     s_soup = BeautifulSoup(s, "html.parser")
+    s.close()
     # soupから各項目のリストを取得
     n = get_names(s_soup)
     q = get_qtys(s_soup)
